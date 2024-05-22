@@ -7,7 +7,7 @@ from resources.appium_url import url
 
 
 class Driver:
-    def set_up(self, device):
+    def set_up(self, device: str) -> webdriver.Remote:
         driver = None
     
         if(device == 'Android'):        

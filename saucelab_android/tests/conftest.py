@@ -4,13 +4,13 @@ import allure
 from allure_commons.types import AttachmentType
 from datetime import datetime
 
-from saucelab_android.services.page_factory import PageFactory
+from saucelab_android.services.screen_factory import ScreenFactory
 
 @pytest.fixture()
-def pages(request):
-    page_factory = PageFactory('Android')
-    driver = page_factory.driver
-    yield page_factory
+def screens(request):
+    screen_factory = ScreenFactory('Android')
+    driver = screen_factory.driver
+    yield screen_factory
     item = request.node
     folder_path = './saucelab_android/failed_screenshots'
     if item.rep_call.failed:

@@ -1,6 +1,6 @@
-from saucelab_android.pages.base_page import BasePage
+from saucelab_android.screens.base_screen import BaseScreen
 
-class CatalogPage(BasePage):
+class CatalogScreen(BaseScreen):
     def __init__(self, driver):
         super().__init__(driver)
         
@@ -11,9 +11,9 @@ class CatalogPage(BasePage):
         product_name = product_name.lower().strip()
         
         while product_name not in current_products:
-            products = self.get_elements(self.catalog_page_locators.products)
+            products = self.get_elements(self.catalog_screen_locators.products)
             for product in products:
-                text = self.get_text(self.catalog_page_locators.product_title, product).lower().strip()
+                text = self.get_text(self.catalog_screen_locators.product_title, product).lower().strip()
                 if(text != product_name):
                     current_products.append(text)
                 else:
@@ -29,4 +29,4 @@ class CatalogPage(BasePage):
             
             prev_products = current_products
             current_products = []
-            self.scroll_page()
+            self.scroll_screen()
