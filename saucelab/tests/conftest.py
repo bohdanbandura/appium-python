@@ -4,15 +4,17 @@ import allure
 from allure_commons.types import AttachmentType
 from datetime import datetime
 
-from saucelab_android.services.screen_factory import ScreenFactory
+from saucelab.services.screen_factory import ScreenFactory
+from saucelab.services.device_selector import device_selector
 
 @pytest.fixture()
-def screens(request):
-    screen_factory = ScreenFactory('Android')
+def screens(request, device_selector):
+    device = device_selector
+    screen_factory = ScreenFactory(device)
     driver = screen_factory.driver
     yield screen_factory
     item = request.node
-    folder_path = './saucelab_android/failed_screenshots'
+    folder_path = './saucelab/failed_screenshots'
     if item.rep_call.failed:
         if not os.path.isdir(folder_path):
             os.mkdir(folder_path)
@@ -27,3 +29,8 @@ def pytest_runtest_makereport(item, call):
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
     return rep
+
+def pytest_addoption(parser):
+    parser.addoption('--device', action='store', default='android')
+    parser.addoption('--env', action='store', default='production')
+    

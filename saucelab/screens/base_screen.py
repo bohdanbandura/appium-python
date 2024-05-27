@@ -5,16 +5,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.remote.webelement import WebElement
 
-from saucelab_android.resources.locators import LoginScreenLocators
-from saucelab_android.resources.locators import BaseScreenLocators
-from saucelab_android.resources.locators import CatalogScreenLocators
+from saucelab.resources.locators.ios_locators import *
+from saucelab.resources.locators.android_locators import *
 
 class BaseScreen:
-    def __init__(self, driver: webdriver.Remote):
+    def __init__(self, driver: webdriver.Remote, device: str):
         self.driver = driver
-        self.base_screen_locators = BaseScreenLocators()
-        self.login_screen_locators = LoginScreenLocators()
-        self.catalog_screen_locators = CatalogScreenLocators()
+        self.base_screen_locators = BaseScreenLocators() if device == 'android' else IOSBaseScreenLocators()
+        self.login_screen_locators = LoginScreenLocators() if device == 'android' else IOSLoginScreenLocators()
+        self.catalog_screen_locators = CatalogScreenLocators() if device == 'android' else IOSCatalogScreenLocators()
         self.wait = WebDriverWait(self.driver, 10)
         
     @allure.step('Get element {locator}')

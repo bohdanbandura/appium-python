@@ -1,7 +1,7 @@
 import pytest
 import allure
 
-from saucelab_android.resources.test_data import TestData
+from saucelab.resources.test_data import TestData
 
 @allure.feature('Main')
 @pytest.mark.usefixtures("screens")

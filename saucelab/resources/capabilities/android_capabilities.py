@@ -1,7 +1,7 @@
 from typing import Any, Dict
 import os
 
-file_name = "mda-2.0.1-22.apk"
+android_file_name = "apps/mda-2.0.1-22.apk"
 
 cap: Dict[str, Any] = {
     "platformName": "Android",
@@ -10,5 +10,5 @@ cap: Dict[str, Any] = {
     "appPackage": "com.saucelabs.mydemoapp.android",
     "language": "en",
     "locale": "US",
-    "app": os.path.abspath(file_name)
+    "app": os.path.abspath(android_file_name)
 }

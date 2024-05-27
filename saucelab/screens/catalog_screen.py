@@ -1,8 +1,8 @@
-from saucelab_android.screens.base_screen import BaseScreen
+from saucelab.screens.base_screen import BaseScreen
 
 class CatalogScreen(BaseScreen):
-    def __init__(self, driver):
-        super().__init__(driver)
+    def __init__(self, driver, device):
+        super().__init__(driver, device)
         
     def find_product(self, product_name):
         prev_products = []
